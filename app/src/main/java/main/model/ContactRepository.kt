@@ -1,12 +1,13 @@
 package main.model
 
 import android.arch.paging.DataSource
+import main.App
 import main.db.dao.ContactDao
 import main.db.entity.Contact
-import main.di.components.ContactScope
-import javax.inject.Inject
 
-@ContactScope
-class ContactRepository @Inject constructor(private val dao: ContactDao) {
+class ContactRepository {
+
+    private val dao: ContactDao by lazy { App.dataBase.contactsDao() }
+
     fun getData(): DataSource.Factory<Int, Contact> = dao.getAll()
 }
