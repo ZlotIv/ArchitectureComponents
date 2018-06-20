@@ -30,13 +30,12 @@ class ListFragment : Fragment(), LifecycleObserver {
         viewModel = ViewModelProviders.of(this).get(ListFragmentViewModel::class.java)
         activity?.let { viewModelActivity = ViewModelProviders.of(it).get(MainActivityViewModel::class.java) }
 
-
-        return view
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observer = ListFragmentObserver(contactRv, this, viewModel)
+        observer = ListFragmentObserver(contactRv, this, viewModel, viewModelActivity)
         lifecycle.addObserver(observer)
     }
 }

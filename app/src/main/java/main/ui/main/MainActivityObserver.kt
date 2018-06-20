@@ -1,27 +1,20 @@
 package main.ui.main
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.OnLifecycleEvent
-import android.util.Log
-import main.ui.list.ListFragment
-import zlotnikov.architecturecomponents.R
+import android.arch.lifecycle.*
 
 
-class MainActivityObserver(private val activity: MainActivity, private val lifeCycle: Lifecycle): LifecycleObserver {
+class MainActivityObserver(private val viewModel: MainActivityViewModel, private val lifeCycleOwner: LifecycleOwner, private val lifeCycle: Lifecycle): LifecycleObserver {
 
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
-        Log.i("lifeCycle", "OnCreate()")
-        activity.supportFragmentManager
-                .beginTransaction()
-                .add(R.id.mainContainer, ListFragment.newInstance())
-                .commit()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
+        viewModel.getContact().observe(lifeCycleOwner, Observer {
+
+        })
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
@@ -31,5 +24,4 @@ class MainActivityObserver(private val activity: MainActivity, private val lifeC
 //
 //        }
     }
-
 }

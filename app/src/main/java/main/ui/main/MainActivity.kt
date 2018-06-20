@@ -4,6 +4,8 @@ import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import main.ui.details.DetailsFragment
+import main.ui.list.ListFragment
 import zlotnikov.architecturecomponents.R
 
 class MainActivity : AppCompatActivity(), LifecycleOwner {
@@ -16,7 +18,22 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         setContentView(R.layout.activity_main)
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
-        observer = MainActivityObserver(this, lifecycle)
+        observer = MainActivityObserver(viewModel,this, lifecycle)
         lifecycle.addObserver(observer)
+
+        setFragment()
+
+    }
+
+    private fun setFragment() {
+        supportFragmentManager
+                .beginTransaction()
+                .add(R.id.firstContainer, DetailsFragment.newInstance())
+                .commit()
+
+        supportFragmentManager
+                .beginTransaction()
+                .add(R.id.secondContainer, ListFragment.newInstance())
+                .commit()
     }
 }

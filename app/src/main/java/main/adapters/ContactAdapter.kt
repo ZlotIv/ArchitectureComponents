@@ -7,11 +7,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import main.db.entity.Contact
+import main.ui.main.MainActivityViewModel
 import zlotnikov.architecturecomponents.R
 import zlotnikov.architecturecomponents.databinding.ContactListItemBinding
 
 
-class ContactAdapter : PagedListAdapter<Contact, ContactAdapter.ContactViewHolder>(
+class ContactAdapter(private val viewModelActivity: MainActivityViewModel) : PagedListAdapter<Contact, ContactAdapter.ContactViewHolder>(
         object : DiffUtil.ItemCallback<Contact>() {
             override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean = oldItem.id == newItem.id
 
@@ -29,12 +30,13 @@ class ContactAdapter : PagedListAdapter<Contact, ContactAdapter.ContactViewHolde
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
+        getItem(position)?.let { holder.bind(viewModelActivity, it) }
     }
 
     class ContactViewHolder(private val binding: ContactListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(contact: Contact) {
+        fun bind(viewModelActivity: MainActivityViewModel, contact: Contact) {
             binding.contact = contact
+            binding.viewModel = viewModelActivity
         }
     }
 }

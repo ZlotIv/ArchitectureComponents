@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">ArchitectureComponents</string>
-
+    <string name="first_name">Имя</string>
+    <string name="last_name">Фамилия</string>
+    <string name="age">Возраст</string>
+    <string name="post">Должность</string>
+    <string name="phone">Телефон</string>
+    <string name="delete">Удалить</string>
 </resources>

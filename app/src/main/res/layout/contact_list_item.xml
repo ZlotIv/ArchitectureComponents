@@ -6,10 +6,15 @@
         <variable
             name="contact"
             type="main.db.entity.Contact" />
+        <variable
+            name="viewModel"
+            type="main.ui.main.MainActivityViewModel" />
     </data>
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="50dp">
+    android:layout_height="60dp"
+    android:clickable="true"
+    android:onClick="@{(view) -> viewModel.setContact(contact)}">
 
     <TextView
         android:id="@+id/firstNameTv"
@@ -17,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:text="@{contact.firstName, default = First_Name}"
+        android:text="@{contact.firstName}"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/lastNameTv"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:text="@{contact.lastName, default = Last_Name}"
+        android:text="@{contact.lastName}"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +64,7 @@
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="@{contact.post, default = Post}"
+        android:text="@{contact.post}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/barrier"
